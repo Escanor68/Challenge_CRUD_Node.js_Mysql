@@ -38,7 +38,7 @@ const handler = async (req, res) => {
 
 		const usuariosOempresasJson = JSON.stringify(usuarioOempresas);
 		const contenidoJson = JSON.stringify(contenido);
-		await ClassModel.prototype.insertar(usuariosOempresasJson, contenidoJson, 'mail');
+		await ClassModel.prototype.insertarMail(usuariosOempresasJson, contenidoJson, 'mail');
 
 		res.status(200).json({ message: `Se enviaron los mails para los ${tabla}s` });
 
