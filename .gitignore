@@ -1,0 +1,4 @@
+node_modules/
+.env
+prueba.mwb
+package-lock.json
