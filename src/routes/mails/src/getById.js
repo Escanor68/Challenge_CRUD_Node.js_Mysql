@@ -1,5 +1,5 @@
 const express = require('express');
-const ClassModel = require('../../../../modules/class/Models');
+const MailModel = require('../../../models/Mail');
 const schemaGet = require('../../../structures/mail/getById');
 
 const app = express.Router();
@@ -12,7 +12,7 @@ const handler = async (req, res) => {
 	try {
 		const { id } = req.body;
 
-		const mail = await ClassModel.prototype.obtenerPorId(id, 'mail');
+		const mail = await MailModel.prototype.obtenerPorIdMail(id);
 
 		res.status(200).json({ mail });
 	} catch(error) {

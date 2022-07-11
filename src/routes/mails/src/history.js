@@ -1,11 +1,11 @@
 const express = require('express');
-const ClassModel = require('../../../../modules/class/Models');
+const MailModel = require('../../../models/Mail');
 
 const app = express.Router();
 
 const handler = async (req, res) => {
 	try {
-		const mails = await ClassModel.prototype.obtener('mail');
+		const mails = await MailModel.prototype.obtenerMail();
 
 		res.status(200).json({ Mail: mails });
 	} catch(error) {

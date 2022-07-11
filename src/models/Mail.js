@@ -10,7 +10,7 @@ class Mail extends Model {
 
 	async insertarMail(usuariosOempresasJson, contenidoJson) {
 		return new Promise((resolve, reject) => {
-			conexion.query(`insert into ${'mail'}
+			conexion.query(`insert into mail
             (usuariosOempresasJson, contenidoJson)
             values
             (?, ?)`,
@@ -19,6 +19,42 @@ class Mail extends Model {
 				if(err)
 					reject(err);
 				else resolve(resultados.insertId);
+			});
+		});
+	}
+
+	async obtenerMail() {
+		return new Promise((resolve, reject) => {
+			conexion.query('select id, usuariosOempresasJson, contenidoJson from mail',
+				(err, resultados) => {
+					if(err)
+						reject(err);
+					else resolve(resultados);
+				});
+		});
+	}
+
+	async obtenerPorIdMail(id) {
+		return new Promise((resolve, reject) => {
+			conexion.query('select id, usuariosOempresasJson, contenidoJson from mail where id = ?',
+				[id],
+				(err, resultados) => {
+					if(err)
+						reject(err);
+					else resolve(resultados[0]);
+				});
+		});
+	}
+
+	async eliminarMail(id) {
+		return new Promise((resolve, reject) => {
+			conexion.query(`delete from mail
+            where id = ?`,
+			[id],
+			err => {
+				if(err)
+					reject(err);
+				else resolve();
 			});
 		});
 	}

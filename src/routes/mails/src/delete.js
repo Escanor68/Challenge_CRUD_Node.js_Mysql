@@ -1,5 +1,5 @@
 const express = require('express');
-const ClassModel = require('../../../../modules/class/Models');
+const MailModel = require('../../../models/Mail');
 const schemaCreate = require('../../../structures/mail/delete');
 
 const app = express.Router();
@@ -12,7 +12,7 @@ const handler = async (req, res) => {
 	try {
 		const { id } = req.body;
 
-		await ClassModel.prototype.eliminar(id, 'mail');
+		await MailModel.prototype.eliminarMail(id);
 
 		res.status(200).json({ message: 'Se eliminio el mail correctamente' });
 	} catch(error) {
