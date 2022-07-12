@@ -2,6 +2,7 @@ const express = require('express');
 const schemaCreate = require('../../../structures/mail/sendMail');
 const SendEmail = require('../../../../modules/email/sendMail');
 const MailModel = require('../../../models/Mail');
+const ClassModel = require('../../../../modules/class/Models');
 
 const app = express.Router();
 
@@ -16,23 +17,22 @@ const handler = async (req, res) => {
 
 		/* contenido[0] = subject, contenido[1] = texto, contenido[2] = pdfname
 		seria la estructura deseada para el envio de los mails */
-
 		if(contenido[2] != null) {
-			idParas.forEach(element => {
-				const para = MailModel.prototype.obtenerPorId(element, tabla);
-				SendEmail.send(para.email, contenido[0], contenido[1], contenido[2]);
-			});
+			for(const sujeto of idParas) {
+				const para = await ClassModel.prototype.obtenerPorId(sujeto, tabla);
+				await SendEmail.send(para.email, contenido[0], contenido[1], contenido[2]);
+			}
 		} else {
-			idParas.forEach(element => {
-				const para = MailModel.prototype.obtenerPorId(element, tabla);
-				SendEmail.send(para.email, contenido[0], contenido[1]);
-			});
+			for(const sujeto of idParas) {
+				const para = await ClassModel.prototype.obtenerPorId(sujeto, tabla);
+				await SendEmail.send(para.email, contenido[0], contenido[1]);
+			}
 		}
 
 		const usuarioOempresas = [];
 
 		idParas.forEach(element => {
-			const para = MailModel.prototype.obtenerPorId(element, tabla);
+			const para = ClassModel.prototype.obtenerPorId(element, tabla);
 			usuarioOempresas.push(para);
 		});
 
