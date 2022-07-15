@@ -20,5 +20,5 @@ const handler = async (req, res) => {
 	}
 };
 
-app.get('/', handler);
+app.post('/', handler);
 module.exports = { app, handler };

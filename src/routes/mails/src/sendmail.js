@@ -31,10 +31,10 @@ const handler = async (req, res) => {
 
 		const usuarioOempresas = [];
 
-		idParas.forEach(element => {
-			const para = ClassModel.prototype.obtenerPorId(element, tabla);
+		for(const id of idParas) {
+			const para = await ClassModel.prototype.obtenerPorId(id, tabla);
 			usuarioOempresas.push(para);
-		});
+		}
 
 		const usuariosOempresasJson = JSON.stringify(usuarioOempresas);
 		const contenidoJson = JSON.stringify(contenido);
